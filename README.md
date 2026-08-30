@@ -1,32 +1,56 @@
 # U-Plus Fraud Investigation
 
-## Project Overview
-U-Plus Fraud Investigation is a web-based application designed to manage disputed transaction cases and support the fraud investigation workflow.
+## 📌 Project Overview
 
-## Key Features
-- Disputed transaction case management
+U-Plus Fraud Investigation is a web-based application designed to manage and investigate disputed financial transactions.
+
+The application provides a structured workflow for handling fraud investigation cases from customer notification to final resolution.
+
+## 🎯 Objectives
+
+- Manage disputed transaction cases
+- Capture customer and transaction details
+- Support fraud investigation workflow
+- Review investigation decisions
+- Process refunds when applicable
+- Track case status until resolution
+
+## 🔄 Case Workflow
+
+The application follows these stages:
+
+1. **Notification** – Select customer and enter disputed transaction details
+2. **Investigation** – Investigate the reported transaction
+3. **Decision Review** – Review the investigation findings
+4. **Refund Processing** – Process refund when required
+5. **Resolution** – Complete and close the case
+
+## ✨ Key Features
+
 - Customer selection
-- Transaction details entry
-- Investigation workflow
+- Disputed transaction management
+- Transaction ID and amount tracking
+- Fraud investigation workflow
 - Decision review
 - Refund processing
-- Resolution tracking
-- Clean and user-friendly interface
+- Case resolution tracking
+- Simple and user-friendly interface
 
-## Workflow
-Notification → Investigation → Decision Review → Refund Processing → Resolution
+## 🛠️ Technologies Used
 
-## Technologies Used
 - HTML
 - CSS
 - JavaScript
+- GitHub
 - GitHub Pages
 
-## Live Demo
-https://romanya16.github.io/Movie-Ticket-Booking-Management-Application/
+## 🚀 Live Demo
 
-## Project Purpose
-This project demonstrates a simple digital workflow for managing disputed transactions and organizing fraud investigation cases.
+[View Live Demo](https://romanya16.github.io/Movie-Ticket-Booking-Management-Application/)
 
-## Author
-Romanya16
+## 📂 Project Structure
+
+```text
+U-Plus Fraud Investigation
+│
+└── index.html
