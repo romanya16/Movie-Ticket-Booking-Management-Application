@@ -3,94 +3,931 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>U-Plus Fraud Investigation Demo</title>
+
+<title>Movie Ticket Booking Management Application</title>
+
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f4f7fb;color:#172033}
-header{background:#102a43;color:white;padding:22px 6%;display:flex;justify-content:space-between;align-items:center}
-header h1{margin:0;font-size:24px}.badge{background:#f7c948;color:#172033;padding:7px 12px;border-radius:20px;font-size:12px;font-weight:bold}
-.container{max-width:1100px;margin:28px auto;padding:0 18px}
-.card{background:white;border-radius:14px;padding:22px;margin-bottom:20px;box-shadow:0 3px 14px #00000012}
-.stages{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}.stage{padding:10px 14px;border-radius:20px;background:#e8eef5;font-size:13px}.stage.active{background:#2563eb;color:white}.stage.done{background:#16a34a;color:white}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
-label{display:block;font-weight:bold;font-size:13px;margin:10px 0 6px}
-input,select,textarea{width:100%;padding:11px;border:1px solid #cbd5e1;border-radius:8px;font-size:14px}
-button{border:0;border-radius:8px;padding:11px 17px;background:#2563eb;color:white;font-weight:bold;cursor:pointer;margin-top:14px}button.secondary{background:#64748b}button.danger{background:#dc2626}
-.hidden{display:none}.status{padding:12px;border-radius:8px;background:#eff6ff;margin-top:14px}.success{background:#ecfdf5;color:#166534}.reject{background:#fef2f2;color:#991b1b}
-.small{font-size:12px;color:#64748b}.progress{height:10px;background:#e2e8f0;border-radius:10px;overflow:hidden}.bar{height:100%;width:20%;background:#2563eb;transition:.3s}
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7fb;
+    color: #172033;
+}
+
+header {
+    background: #102a43;
+    color: white;
+    padding: 22px 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.badge {
+    background: #f7c948;
+    color: #172033;
+    padding: 7px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 28px auto;
+    padding: 0 18px;
+}
+
+.card {
+    background: white;
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 3px 14px #00000012;
+}
+
+h2, h3 {
+    margin-top: 0;
+}
+
+.small {
+    font-size: 13px;
+    color: #64748b;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    font-size: 13px;
+    margin: 10px 0 6px;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 11px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+button {
+    border: 0;
+    border-radius: 8px;
+    padding: 11px 18px;
+    background: #2563eb;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 16px;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+button.success-btn {
+    background: #16a34a;
+}
+
+button.secondary {
+    background: #64748b;
+}
+
+.hidden {
+    display: none;
+}
+
+.status {
+    padding: 14px;
+    border-radius: 8px;
+    background: #eff6ff;
+    margin-top: 14px;
+}
+
+.success {
+    background: #ecfdf5;
+    color: #166534;
+}
+
+.warning {
+    background: #fffbeb;
+    color: #92400e;
+}
+
+.progress {
+    height: 10px;
+    background: #e2e8f0;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 18px 0;
+}
+
+.bar {
+    height: 100%;
+    width: 12.5%;
+    background: #2563eb;
+    transition: 0.4s;
+}
+
+.stages {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.stage {
+    padding: 9px 13px;
+    border-radius: 20px;
+    background: #e8eef5;
+    font-size: 13px;
+}
+
+.stage.active {
+    background: #2563eb;
+    color: white;
+}
+
+.stage.done {
+    background: #16a34a;
+    color: white;
+}
+
+.ticket {
+    border: 2px dashed #2563eb;
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 15px;
+    background: #f8fbff;
+}
+
+.ticket h3 {
+    color: #2563eb;
+}
+
+.total {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.notification-box {
+    border-left: 5px solid #16a34a;
+    background: #ecfdf5;
+    padding: 18px;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+
+ul {
+    line-height: 1.8;
+}
 </style>
 </head>
+
 <body>
-<header><h1>U-Plus Fraud Investigation</h1><span class="badge">DEMO / PROTOTYPE</span></header>
+
+<header>
+    <h1>Movie Ticket Booking Management Application</h1>
+    <span class="badge">DEMO / PROTOTYPE</span>
+</header>
+
 <div class="container">
+
+<!-- PROJECT OVERVIEW -->
 <div class="card">
-<h2>Disputed Transaction Case</h2>
-<p class="small">Case ID: DTC-1001 · Fraud Investigation Management</p>
-<div class="progress"><div id="bar" class="bar"></div></div>
-<div class="stages">
-<span class="stage active" id="s1">Notification</span><span class="stage" id="s2">Investigation</span>
-<span class="stage" id="s3">Decision Review</span><span class="stage" id="s4">Refund Processing</span><span class="stage" id="s5">Resolution</span>
-</div>
-<p><b>Status:</b> <span id="status">Notification</span></p>
+
+    <h2>Movie Ticket Booking Management</h2>
+
+    <p class="small">
+        Case ID: MTB-1001 · CineWave Entertainment
+    </p>
+
+    <p>
+        This application demonstrates the complete movie ticket booking
+        lifecycle from ticket request to booking confirmation.
+    </p>
+
+    <div class="progress">
+        <div id="progressBar" class="bar"></div>
+    </div>
+
+    <div class="stages">
+
+        <span class="stage active" id="s1">
+            Ticket Request
+        </span>
+
+        <span class="stage" id="s2">
+            Availability
+        </span>
+
+        <span class="stage" id="s3">
+            Booking Cost
+        </span>
+
+        <span class="stage" id="s4">
+            Confirmation
+        </span>
+
+        <span class="stage" id="s5">
+            Movie Data
+        </span>
+
+        <span class="stage" id="s6">
+            Review
+        </span>
+
+        <span class="stage" id="s7">
+            Processing
+        </span>
+
+        <span class="stage" id="s8">
+            Notification
+        </span>
+
+    </div>
+
+    <p>
+        <b>Status:</b>
+        <span id="mainStatus">Ticket Request</span>
+    </p>
+
 </div>
 
-<div class="card" id="notification">
-<h3>1. Notification — Select U-Plus Customer</h3>
-<label>Customer</label>
-<select id="customer" onchange="showCustomer()">
-<option value="">Select customer</option><option value="Anna Pajda|Bronze|apajda@example.com">apajda3 — Anna Pajda</option>
-<option value="Ian Mitchell|Gold|imitchell@example.com">imitchell — Ian Mitchell</option>
-<option value="Joachim Wrona|Silver|jwrona@example.com">jwrona1 — Joachim Wrona</option>
-<option value="Rosalyn McGinnis|Gold|rmcginnis@example.com">rmcginnis7 — Rosalyn McGinnis</option>
-</select>
-<div id="customerInfo" class="status hidden"></div>
-<h3>Disputed Transaction Details</h3>
-<div class="grid">
-<div><label>Account number *</label><input id="account"></div><div><label>Amount *</label><input id="amount" type="number" min="5.01"></div>
-<div><label>Date *</label><input id="date" type="date"></div><div><label>Transaction ID</label><input id="txid" value="TXN-2026-001"></div>
-<div><label>Payee</label><input id="payee" value="Online Store"></div><div><label>Transaction Note</label><textarea id="note">Customer reported fraudulent transaction.</textarea></div>
-</div>
-<button onclick="submitNotification()">Submit Notification</button>
-<div id="nmsg"></div>
+
+<!-- US-001 -->
+<div class="card" id="requestSection">
+
+    <h3>US-001: Submit Movie Ticket Request</h3>
+
+    <div class="grid">
+
+        <div>
+            <label>Customer Name *</label>
+            <input
+                type="text"
+                id="customerName"
+                placeholder="Enter customer name"
+            >
+        </div>
+
+        <div>
+            <label>Customer Email *</label>
+            <input
+                type="email"
+                id="customerEmail"
+                placeholder="customer@example.com"
+            >
+        </div>
+
+        <div>
+            <label>Movie Name *</label>
+
+            <select id="movieName">
+                <option value="">Select movie</option>
+                <option value="Avengers: Endgame">
+                    Avengers: Endgame
+                </option>
+
+                <option value="Leo">
+                    Leo
+                </option>
+
+                <option value="Jailer">
+                    Jailer
+                </option>
+
+                <option value="Interstellar">
+                    Interstellar
+                </option>
+            </select>
+        </div>
+
+        <div>
+            <label>Show Date *</label>
+            <input type="date" id="showDate">
+        </div>
+
+        <div>
+            <label>Show Time *</label>
+
+            <select id="showTime">
+                <option value="">Select time</option>
+                <option value="10:00 AM">10:00 AM</option>
+                <option value="1:30 PM">1:30 PM</option>
+                <option value="4:30 PM">4:30 PM</option>
+                <option value="7:30 PM">7:30 PM</option>
+                <option value="10:30 PM">10:30 PM</option>
+            </select>
+        </div>
+
+        <div>
+            <label>Number of Tickets *</label>
+
+            <input
+                type="number"
+                id="ticketCount"
+                min="1"
+                max="10"
+                placeholder="1 - 10"
+            >
+        </div>
+
+    </div>
+
+    <button onclick="submitRequest()">
+        Submit Movie Ticket Request
+    </button>
+
+    <div id="requestMessage"></div>
+
 </div>
 
-<div class="card hidden" id="investigation">
-<h3>2. Investigation</h3><p>Review the customer and transaction details, then record the investigation result.</p>
-<div id="review" class="status"></div>
-<label>Investigation Result *</label>
-<select id="result"><option value="">Select result</option><option value="eligible">Eligible for refund</option><option value="no">No refund</option></select>
-<label>Investigation Notes</label><textarea id="invnotes">Investigation completed by Fraud Analyst.</textarea>
-<button onclick="submitInvestigation()">Submit Investigation</button><div id="imsg"></div>
+
+<!-- US-002 -->
+<div class="card hidden" id="availabilitySection">
+
+    <h3>US-002: Check Show Availability</h3>
+
+    <div class="status success">
+        <b>Show Available</b><br>
+        The selected movie show has sufficient seats available.
+    </div>
+
+    <div id="showDetails" class="ticket"></div>
+
+    <button onclick="checkAvailability()">
+        Confirm Availability
+    </button>
+
+    <div id="availabilityMessage"></div>
+
 </div>
 
-<div class="card hidden" id="decision">
-<h3>3. Decision Review</h3><p>Senior Fraud Analyst / Fraud Manager reviews the refund recommendation.</p>
-<div class="status">Recommendation: <b>Eligible for refund</b></div>
-<button onclick="approve()">Approve Refund</button><button class="danger" onclick="reject()">Reject Refund</button>
-<div id="dmsg"></div>
+
+<!-- US-003 -->
+<div class="card hidden" id="costSection">
+
+    <h3>US-003: Calculate Booking Cost</h3>
+
+    <p>
+        Ticket price is calculated automatically based on
+        the number of tickets.
+    </p>
+
+    <div class="ticket">
+
+        <p>
+            Ticket Price:
+            <b>₹200 per ticket</b>
+        </p>
+
+        <p>
+            Number of Tickets:
+            <b id="displayTickets">0</b>
+        </p>
+
+        <p class="total">
+            Total Cost:
+            ₹<span id="totalCost">0</span>
+        </p>
+
+    </div>
+
+    <button onclick="calculateCost()">
+        Calculate Booking Cost
+    </button>
+
+    <div id="costMessage"></div>
+
 </div>
 
-<div class="card hidden" id="refund">
-<h3>4. Refund Processing</h3><div class="status success">Refund approved. Payment processing completed for demonstration.</div>
-<label>Refund reference</label><input value="REF-2026-001" readonly>
-<button onclick="resolve()">Verify Refund & Resolve Case</button>
+
+<!-- US-004 -->
+<div class="card hidden" id="confirmSection">
+
+    <h3>US-004: Confirm Booking Request</h3>
+
+    <div class="status warning">
+        Please verify the booking details before confirmation.
+    </div>
+
+    <div id="confirmationDetails" class="ticket"></div>
+
+    <button
+        class="success-btn"
+        onclick="confirmBooking()"
+    >
+        Confirm Booking
+    </button>
+
+    <div id="confirmMessage"></div>
+
 </div>
 
-<div class="card hidden" id="resolution">
-<h3>5. Resolution</h3><div class="status success"><b>Resolved-Completed</b><br>Refund payment verified. Customer payment processed email sent.</div>
+
+<!-- US-005 -->
+<div class="card hidden" id="movieDataSection">
+
+    <h3>US-005: Maintain Movie and Show Data</h3>
+
+    <div class="status success">
+
+        <b>Movie Data Verified</b>
+
+        <ul>
+            <li>Movie: <span id="movieData"></span></li>
+            <li>Show Date: <span id="dateData"></span></li>
+            <li>Show Time: <span id="timeData"></span></li>
+            <li>Tickets: <span id="ticketData"></span></li>
+        </ul>
+
+    </div>
+
+    <button onclick="reviewBooking()">
+        Continue to Booking Review
+    </button>
+
 </div>
 
-<div class="card hidden" id="rejection">
-<h3>Approval Rejection</h3><div class="status reject"><b>Resolved-Rejected</b><br>Refund rejection email sent to the U-Plus customer.</div>
+
+<!-- US-006 -->
+<div class="card hidden" id="reviewSection">
+
+    <h3>US-006: Review Booking Details</h3>
+
+    <div id="reviewDetails" class="ticket"></div>
+
+    <button onclick="processBooking()">
+        Approve Booking
+    </button>
+
+    <div id="reviewMessage"></div>
+
 </div>
+
+
+<!-- US-007 -->
+<div class="card hidden" id="processSection">
+
+    <h3>US-007: Process Ticket Booking</h3>
+
+    <div class="status success">
+
+        <b>Booking Processed Successfully</b>
+
+        <p>
+            Seats have been reserved and the booking has been
+            marked as completed.
+        </p>
+
+        <p>
+            Booking Reference:
+            <b id="bookingReference"></b>
+        </p>
+
+    </div>
+
+    <button
+        class="success-btn"
+        onclick="sendNotification()"
+    >
+        Send Booking Confirmation
+    </button>
+
 </div>
+
+
+<!-- US-008 -->
+<div class="card hidden" id="notificationSection">
+
+    <h3>US-008: Notify Booking Confirmation</h3>
+
+    <div class="notification-box">
+
+        <h3>📧 Booking Confirmation Notification</h3>
+
+        <p>
+            <b>To:</b>
+            <span id="emailNotification"></span>
+        </p>
+
+        <p>
+            <b>Subject:</b>
+            Movie Ticket Booking Confirmed -
+            <span id="caseNotification"></span>
+        </p>
+
+        <hr>
+
+        <p>
+            Dear <b id="nameNotification"></b>,
+        </p>
+
+        <p>
+            Your movie ticket booking has been successfully confirmed.
+        </p>
+
+        <p>
+            <b>Case ID:</b>
+            <span id="caseIdDisplay"></span>
+        </p>
+
+        <p>
+            <b>Movie Name:</b>
+            <span id="movieNotification"></span>
+        </p>
+
+        <p>
+            <b>Show Date & Time:</b>
+            <span id="showNotification"></span>
+        </p>
+
+        <p>
+            <b>Number of Tickets:</b>
+            <span id="ticketsNotification"></span>
+        </p>
+
+        <p>
+            <b>Seat Numbers:</b>
+            <span id="seatsNotification"></span>
+        </p>
+
+        <p>
+            <b>Total Cost:</b>
+            ₹<span id="costNotification"></span>
+        </p>
+
+        <p>
+            Please arrive at the theatre before show time
+            and present your booking details at entry.
+        </p>
+
+        <p>
+            Thank you for choosing our services.
+            Enjoy your movie!
+        </p>
+
+        <p>
+            <b>
+                — CineWave Entertainment Booking Support Team
+            </b>
+        </p>
+
+    </div>
+
+    <div class="status success">
+
+        <b>✅ Resolved-Completed</b>
+
+        <br><br>
+
+        Booking completed successfully and
+        confirmation notification generated.
+
+    </div>
+
+</div>
+
+</div>
+
+
 <script>
-let step=1;
-function showCustomer(){let v=document.getElementById('customer').value;if(!v)return;let [n,s,e]=v.split('|');let x=document.getElementById('customerInfo');x.classList.remove('hidden');x.innerHTML=`<b>Full name:</b> ${n}<br><b>Status:</b> ${s}<br><b>Email:</b> ${e}`;}
-function setStep(n,status){step=n;document.getElementById('status').textContent=status;document.getElementById('bar').style.width=(n*20)+'%';for(let i=1;i<=5;i++){let x=document.getElementById('s'+i);x.classList.remove('active','done');if(i<n)x.classList.add('done');if(i===n)x.classList.add('active');}}
-function submitNotification(){let c=document.getElementById('customer').value,a=document.getElementById('account').value,m=Number(document.getElementById('amount').value),d=document.getElementById('date').value;if(!c||!a||!m||!d){document.getElementById('nmsg').innerHTML='<div class="status reject">Please complete Customer, Account number, Amount and Date.</div>';return}if(m<=5){document.getElementById('nmsg').innerHTML='<div class="status reject">Amount must be greater than $5.</div>';return}if(new Date(d)>new Date()){document.getElementById('nmsg').innerHTML='<div class="status reject">Date cannot be in the future.</div>';return}document.getElementById('notification').classList.add('hidden');document.getElementById('investigation').classList.remove('hidden');document.getElementById('review').innerHTML='Customer and disputed transaction details captured successfully.';setStep(2,'Investigation');}
-function submitInvestigation(){let r=document.getElementById('result').value;if(!r){document.getElementById('imsg').innerHTML='<div class="status reject">Please select an investigation result.</div>';return}document.getElementById('investigation').classList.add('hidden');if(r==='eligible'){document.getElementById('decision').classList.remove('hidden');setStep(3,'Decision Review')}else{document.getElementById('rejection').classList.remove('hidden');setStep(5,'Resolved-Rejected')}}
-function approve(){document.getElementById('decision').classList.add('hidden');document.getElementById('refund').classList.remove('hidden');setStep(4,'Refund Processing')}
-function reject(){document.getElementById('decision').classList.add('hidden');document.getElementById('rejection').classList.remove('hidden');setStep(5,'Resolved-Rejected')}
-function resolve(){document.getElementById('refund').classList.add('hidden');document.getElementById('resolution').classList.remove('hidden');setStep(5,'Resolved-Completed')}
+
+let booking = {
+
+    caseId: "MTB-1001",
+
+    customerName: "",
+
+    customerEmail: "",
+
+    movieName: "",
+
+    showDate: "",
+
+    showTime: "",
+
+    ticketCount: 0,
+
+    totalCost: 0,
+
+    seats: [],
+
+    bookingReference: ""
+
+};
+
+
+function updateProgress(step, status) {
+
+    document.getElementById("mainStatus").textContent = status;
+
+    document.getElementById("progressBar").style.width =
+        ((step / 8) * 100) + "%";
+
+    for (let i = 1; i <= 8; i++) {
+
+        let stage = document.getElementById("s" + i);
+
+        stage.classList.remove("active", "done");
+
+        if (i < step) {
+            stage.classList.add("done");
+        }
+
+        if (i === step) {
+            stage.classList.add("active");
+        }
+
+    }
+
+}
+
+
+function submitRequest() {
+
+    booking.customerName =
+        document.getElementById("customerName").value.trim();
+
+    booking.customerEmail =
+        document.getElementById("customerEmail").value.trim();
+
+    booking.movieName =
+        document.getElementById("movieName").value;
+
+    booking.showDate =
+        document.getElementById("showDate").value;
+
+    booking.showTime =
+        document.getElementById("showTime").value;
+
+    booking.ticketCount =
+        Number(document.getElementById("ticketCount").value);
+
+
+    if (
+        !booking.customerName ||
+        !booking.customerEmail ||
+        !booking.movieName ||
+        !booking.showDate ||
+        !booking.showTime ||
+        !booking.ticketCount
+    ) {
+
+        document.getElementById("requestMessage").innerHTML =
+            '<div class="status warning">' +
+            'Please complete all required fields.' +
+            '</div>';
+
+        return;
+    }
+
+
+    if (booking.ticketCount < 1 ||
+        booking.ticketCount > 10) {
+
+        document.getElementById("requestMessage").innerHTML =
+            '<div class="status warning">' +
+            'Tickets must be between 1 and 10.' +
+            '</div>';
+
+        return;
+    }
+
+
+    document.getElementById("requestSection")
+        .classList.add("hidden");
+
+    document.getElementById("availabilitySection")
+        .classList.remove("hidden");
+
+
+    document.getElementById("showDetails").innerHTML =
+
+        "<b>Movie:</b> " + booking.movieName +
+        "<br><b>Date:</b> " + booking.showDate +
+        "<br><b>Time:</b> " + booking.showTime +
+        "<br><b>Tickets Requested:</b> " +
+        booking.ticketCount;
+
+
+    updateProgress(2, "Check Show Availability");
+
+}
+
+
+function checkAvailability() {
+
+    document.getElementById("availabilitySection")
+        .classList.add("hidden");
+
+    document.getElementById("costSection")
+        .classList.remove("hidden");
+
+
+    document.getElementById("displayTickets")
+        .textContent = booking.ticketCount;
+
+
+    updateProgress(3, "Calculate Booking Cost");
+
+}
+
+
+function calculateCost() {
+
+    booking.totalCost =
+        booking.ticketCount * 200;
+
+
+    document.getElementById("totalCost")
+        .textContent = booking.totalCost;
+
+
+    document.getElementById("costSection")
+        .classList.add("hidden");
+
+    document.getElementById("confirmSection")
+        .classList.remove("hidden");
+
+
+    document.getElementById("confirmationDetails").innerHTML =
+
+        "<b>Customer:</b> " +
+        booking.customerName +
+
+        "<br><b>Movie:</b> " +
+        booking.movieName +
+
+        "<br><b>Show:</b> " +
+        booking.showDate +
+        " " +
+        booking.showTime +
+
+        "<br><b>Tickets:</b> " +
+        booking.ticketCount +
+
+        "<br><b>Total Cost:</b> ₹" +
+        booking.totalCost;
+
+
+    updateProgress(4, "Confirm Booking Request");
+
+}
+
+
+function confirmBooking() {
+
+    document.getElementById("confirmSection")
+        .classList.add("hidden");
+
+    document.getElementById("movieDataSection")
+        .classList.remove("hidden");
+
+
+    document.getElementById("movieData")
+        .textContent = booking.movieName;
+
+    document.getElementById("dateData")
+        .textContent = booking.showDate;
+
+    document.getElementById("timeData")
+        .textContent = booking.showTime;
+
+    document.getElementById("ticketData")
+        .textContent = booking.ticketCount;
+
+
+    updateProgress(5, "Maintain Movie and Show Data");
+
+}
+
+
+function reviewBooking() {
+
+    booking.seats = [];
+
+    for (let i = 1; i <= booking.ticketCount; i++) {
+
+        booking.seats.push("A" + (i + 5));
+
+    }
+
+
+    document.getElementById("movieDataSection")
+        .classList.add("hidden");
+
+    document.getElementById("reviewSection")
+        .classList.remove("hidden");
+
+
+    document.getElementById("reviewDetails").innerHTML =
+
+        "<b>Customer:</b> " +
+        booking.customerName +
+
+        "<br><b>Movie:</b> " +
+        booking.movieName +
+
+        "<br><b>Show:</b> " +
+        booking.showDate +
+        " " +
+        booking.showTime +
+
+        "<br><b>Seat Numbers:</b> " +
+        booking.seats.join(", ") +
+
+        "<br><b>Total Cost:</b> ₹" +
+        booking.totalCost;
+
+
+    updateProgress(6, "Review Booking Details");
+
+}
+
+
+function processBooking() {
+
+    booking.bookingReference =
+        "BOOK-" +
+        Math.floor(10000 + Math.random() * 90000);
+
+
+    document.getElementById("reviewSection")
+        .classList.add("hidden");
+
+    document.getElementById("processSection")
+        .classList.remove("hidden");
+
+
+    document.getElementById("bookingReference")
+        .textContent = booking.bookingReference;
+
+
+    updateProgress(7, "Process Ticket Booking");
+
+}
+
+
+function sendNotification() {
+
+    document.getElementById("processSection")
+        .classList.add("hidden");
+
+    document.getElementById("notificationSection")
+        .classList.remove("hidden");
+
+
+    document.getElementById("emailNotification")
+        .textContent = booking.customerEmail;
+
+    document.getElementById("caseNotification")
+        .textContent = booking.caseId;
+
+    document.getElementById("nameNotification")
+        .textContent = booking.customerName;
+
+    document.getElementById("caseIdDisplay")
+        .textContent = booking.caseId;
+
+    document.getElementById("movieNotification")
+        .textContent = booking.movieName;
+
+    document.getElementById("showNotification")
+        .textContent =
+        booking.showDate + " " + booking.showTime;
+
+    document.getElementById("ticketsNotification")
+        .textContent = booking.ticketCount;
+
+    document.getElementById("seatsNotification")
+        .textContent = booking.seats.join(", ");
+
+    document.getElementById("costNotification")
+        .textContent = booking.totalCost;
+
+
+    updateProgress(8, "Booking Confirmation Sent");
+
+}
+
 </script>
-</body></html>
+
+</body>
+</html>
