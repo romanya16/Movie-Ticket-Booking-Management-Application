@@ -1,56 +1,94 @@
-# U-Plus Fraud Investigation
+# 🎬 Movie Ticket Booking Management Application
 
 ## 📌 Project Overview
 
-U-Plus Fraud Investigation is a web-based application designed to manage and investigate disputed financial transactions.
+The **Movie Ticket Booking Management Application** is a web-based application designed to manage movie ticket booking requests efficiently.
 
-The application provides a structured workflow for handling fraud investigation cases from customer notification to final resolution.
+The application provides a complete booking flow from submitting a movie ticket request to checking show availability, calculating booking cost, confirming the booking, processing tickets, and sending a booking confirmation notification.
 
-## 🎯 Objectives
+---
 
-- Manage disputed transaction cases
-- Capture customer and transaction details
-- Support fraud investigation workflow
-- Review investigation decisions
-- Process refunds when applicable
-- Track case status until resolution
+## 🎯 Project Objectives
 
-## 🔄 Case Workflow
+- Allow customers to request movie tickets.
+- Check movie show availability.
+- Calculate the total booking cost.
+- Capture customer confirmation before final booking.
+- Maintain movie and show details.
+- Review booking information.
+- Process ticket bookings.
+- Notify customers after successful booking.
 
-The application follows these stages:
+---
 
-1. **Notification** – Select customer and enter disputed transaction details
-2. **Investigation** – Investigate the reported transaction
-3. **Decision Review** – Review the investigation findings
-4. **Refund Processing** – Process refund when required
-5. **Resolution** – Complete and close the case
+## 🚀 Features
 
-## ✨ Key Features
+### 1. Submit Movie Ticket Request
+Customers can enter:
 
-- Customer selection
-- Disputed transaction management
-- Transaction ID and amount tracking
-- Fraud investigation workflow
-- Decision review
-- Refund processing
-- Case resolution tracking
-- Simple and user-friendly interface
+- Customer Name
+- Customer Email
+- Movie Name
+- Show Date
+- Show Time
+- Number of Tickets
 
-## 🛠️ Technologies Used
+### 2. Check Show Availability
+The system verifies that the selected movie show is available.
 
-- HTML
-- CSS
-- JavaScript
-- GitHub
-- GitHub Pages
+### 3. Calculate Booking Cost
+The application automatically calculates the ticket cost.
 
-## 🚀 Live Demo
+**Ticket Price:** ₹200 per ticket
 
-[View Live Demo](https://romanya16.github.io/Movie-Ticket-Booking-Management-Application/)
+### 4. Confirm Booking Request
+Customers can review their booking details before confirmation.
 
-## 📂 Project Structure
+### 5. Maintain Movie and Show Data
+The application displays and maintains selected movie and show information.
+
+### 6. Review Booking Details
+Customers can review:
+
+- Movie Name
+- Show Date & Time
+- Number of Tickets
+- Seat Numbers
+- Total Cost
+
+### 7. Process Ticket Booking
+The system generates a unique booking reference and processes the ticket reservation.
+
+### 8. Booking Confirmation Notification
+After successful booking, a confirmation notification is generated containing:
+
+- Case ID
+- Customer Name
+- Movie Name
+- Show Date & Time
+- Number of Tickets
+- Seat Numbers
+- Total Cost
+
+---
+
+## 🔄 Booking Lifecycle
 
 ```text
-U-Plus Fraud Investigation
-│
-└── index.html
+Ticket Request
+      ↓
+Check Availability
+      ↓
+Calculate Booking Cost
+      ↓
+Confirm Booking
+      ↓
+Maintain Movie & Show Data
+      ↓
+Review Booking
+      ↓
+Process Ticket Booking
+      ↓
+Booking Confirmation Notification
+      ↓
+Resolved - Completed
